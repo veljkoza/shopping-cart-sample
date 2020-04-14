@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Shopping Cart sample</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+  <div class="add-product">
+    <form>
+      <div>
+        <label>Product name:</label>
+        <input type="text" placeholder="Casio Watch" />
+      </div>
+      
+      <div>
+        <label>Product description:</label>
+        <textarea placeholder="Sample description..."></textarea>
+      </div>
+      
+      <div>
+        <label>Product image:</label>
+        <input type="text" placeholder="http://...jpg" />
+      </div>
+      
+      <div>
+        <label>Product price:</label>
+        <input type="number" min="0" placeholder="33.50" />
+      </div>
+      
+      <button>Add</button>
+    </form>
+  </div>
+  
+  <div class="list-products">
+    <div class="product">
+      <img src="https://sc02.alicdn.com/kf/HTB1gHRfg6uhSKJjSspmq6AQDpXaI/Accept-Sample-Design-Your-Own-Blank-Wrist.jpg_350x350.jpg" />
+      <p>Sample Watch</p>
+      <p>$199</p>
+      <button class="details-button">Details</button>
+      <button class="buy-button">Buy</button>
+    </div>
+    
+    <div class="product">
+      <img src="https://pl.shadestation.com/media/thumbs/350x350/media/product_images/Fossil-Watches-FS5439fw350fh350.jpg" />
+      <p>Product #2</p>
+      <p>$230</p>
+      <button class="details-button">Details</button>
+      <button class="buy-button">Buy</button>
+    </div>
+    
+    
+  </div>
+  
+  <div class="shopping-cart">
+    <div class="shopping-cart-products">
+      <div class="shopping-cart-product">
+        <div class="product-info">
+          <div>
+            <h3>Sample Watch</h3>
+            <p>$199 &times; 1</p>
+          </div>
+          <img src="https://sc02.alicdn.com/kf/HTB1gHRfg6uhSKJjSspmq6AQDpXaI/Accept-Sample-Design-Your-Own-Blank-Wrist.jpg_350x350.jpg" />
+        </div>
+        <div class="product-count">
+          <button>-</button>
+          <span>1</span>
+          <button>+</button>
+        </div>
+      </div>
+      
+      <div class="shopping-cart-product">
+        <div class="product-info">
+          <div>
+            <h3>Product #2</h3>
+            <p>$230 &times; 1</p>
+          </div>
+          <img src="https://pl.shadestation.com/media/thumbs/350x350/media/product_images/Fossil-Watches-FS5439fw350fh350.jpg" />
+        </div>
+        <div class="product-count">
+          <button>-</button>
+          <span>1</span>
+          <button>+</button>
+        </div>
+      </div>
+      
+    </div>
+    <div class="shopping-cart-summary">
+      <div>Total: <b>$429</b></div>
+      <div><button>Purchase</button></div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>
