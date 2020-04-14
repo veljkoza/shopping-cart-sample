@@ -85,7 +85,6 @@
   top: -500px;
   left: 34%;
   right: 22%;
-  height: 400px;
   width: 600px;
   background-color: rgb(26, 44, 80);
   display: flex;
@@ -103,7 +102,7 @@
   box-shadow: -10px 0px 10px -2px #1a1919e7;
   width: 60%;
   position: relative;
-  padding: 2rem;
+  padding: 1.3rem;
 }
 
 .modal-right > p:first-of-type {
@@ -119,7 +118,7 @@
   height: 2px;
   width: 100%;
   border-bottom: 2px solid white;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .modal-bot {
@@ -128,7 +127,7 @@
   justify-content: space-around;
   align-items: center;
   height: 10%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .modal-bot button {
@@ -227,6 +226,10 @@
 
 .shopping-cart-product {
   margin-bottom: 10px;
+}
+
+.shopping-cart-product.warning{
+  box-shadow: 0px 0px 10px rgba(204, 40, 40, 0.74);
 }
 
 .product-info {
