@@ -194,6 +194,7 @@ function createCartItem(id, name, price, img, loaded) {
   minusBtn.addEventListener("click", (e) => {
     if (noOfProducts.textContent <= 1) {
       deleteCartItem(id);
+    increaseTotal(-price);
       return;
     }
     createdItem.noOf--;
@@ -219,12 +220,14 @@ function createCartItem(id, name, price, img, loaded) {
 function deleteCartItem(id) {
   let cartItems = JSON.parse(localStorage.getItem("cartItems"));
   let cartItemToDelete = findCartItem(id);
-  console.log(cartItemToDelete);
   let cartItemIndex = cartItems.indexOf(
     cartItems.find((item) => item.id === id)
   );
+  console.log(cartItems)
   console.log(cartItemIndex);
-  cartItems.slice(cartItemIndex, 1);
+  cartItems.splice(cartItemIndex, 1);
+  console.log(cartItems)
+
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   shoppingCart.removeChild(cartItemToDelete);
 }
