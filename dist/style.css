@@ -80,6 +80,34 @@
   height: 100%;
 }
 
+.modal-container.active .purchase{
+  background-color: #44e19f;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 2rem;
+  text-align: center;
+  color: #0a975c;
+}
+
+#okay{
+  background-color: transparent;
+  color: white;
+  border: 3px solid white;
+}
+
+#okay:hover{
+  color: #0a975c;
+  border-color:#0a975c;
+  cursor: pointer;
+}
+
 .modal {
   position: absolute;
   top: -500px;

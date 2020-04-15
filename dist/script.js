@@ -16,6 +16,8 @@ const hideModalBtn = $("#hideModal");
 
 const shoppingCart = $(".shopping-cart-products");
 const totalAmountElement = $("#totalAmount");
+const purchaseBtn = $("#purchase");
+
 if (localStorage.getItem("allItemsJsonId") === null) {
   createItemsJson();
 } else {
@@ -36,10 +38,9 @@ if (localStorage.getItem("cartItems") === null) {
       cartItem.img,
       true
     );
-    cartSum+=cartItem.price*cartItem.noOf;
-    totalAmountElement.innerHTML = `$${cartSum}`
+    cartSum += cartItem.price * cartItem.noOf;
+    totalAmountElement.innerHTML = `$${cartSum}`;
   });
-
 }
 
 async function loadItems() {
@@ -91,6 +92,21 @@ async function createItemsJson() {
         product.classList.remove("warning");
       }
     });
+  });
+  purchaseBtn.addEventListener("click", (e) => {
+    let purchaseModal = document.createElement("div");
+    purchaseModal.innerHTML =
+      "<h2>Purchase has been successful!</h2><button id='okay'>Okay.</button>";
+    purchaseModal.lastElementChild.addEventListener("click", (e) => {
+      modalContainer.classList.remove("active");
+      JSON.parse(localStorage.getItem("cartItems")).forEach(cartItem => deleteCartItem(cartItem.id));
+      totalAmountElement.textContent = "$0";
+      let cartItems = [];
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    });
+    purchaseModal.classList.add("purchase");
+    modal.appendChild(purchaseModal);
+    modalContainer.classList.add("active");
   });
 })();
 
@@ -194,7 +210,7 @@ function createCartItem(id, name, price, img, loaded) {
   minusBtn.addEventListener("click", (e) => {
     if (noOfProducts.textContent <= 1) {
       deleteCartItem(id);
-    increaseTotal(-price);
+      increaseTotal(-price);
       return;
     }
     createdItem.noOf--;
@@ -223,10 +239,7 @@ function deleteCartItem(id) {
   let cartItemIndex = cartItems.indexOf(
     cartItems.find((item) => item.id === id)
   );
-  console.log(cartItems)
-  console.log(cartItemIndex);
   cartItems.splice(cartItemIndex, 1);
-  console.log(cartItems)
 
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   shoppingCart.removeChild(cartItemToDelete);
