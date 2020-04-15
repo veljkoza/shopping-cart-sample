@@ -84,12 +84,35 @@ async function createItemsJson() {
 }
 
 (function loadEventListeners() {
+  addProductPrice.addEventListener("keyup", (e) => {
+    console.log(e.target.oldValue)
+    if (!/^\d+$/.test(e.target.value)) {
+      addProductPrice.value ="";
+      addProductPrice.classList.add("warning")  
+      return;
+    }else{
+      addProductPrice.classList.remove("warning")
+    }
+  });
+
   addBtn.addEventListener("click", addNewItem);
   document.addEventListener("click", (e) => {
     let cartProducts = document.querySelectorAll(".shopping-cart-product");
     [...cartProducts].forEach((product) => {
       if (product.classList.contains("warning")) {
         product.classList.remove("warning");
+      }
+      if (addProductName.classList.contains("warning")) {
+        addProductName.classList.remove("warning");
+      }
+      if (addProductImg.classList.contains("warning")) {
+        addProductImg.classList.remove("warning");
+      }
+      if (addProductDesc.classList.contains("warning")) {
+        addProductDesc.classList.remove("warning");
+      }
+      if (addProductPrice.classList.contains("warning")) {
+        addProductPrice.classList.remove("warning");
       }
     });
   });
@@ -99,7 +122,9 @@ async function createItemsJson() {
       "<h2>Purchase has been successful!</h2><button id='okay'>Okay.</button>";
     purchaseModal.lastElementChild.addEventListener("click", (e) => {
       modalContainer.classList.remove("active");
-      JSON.parse(localStorage.getItem("cartItems")).forEach(cartItem => deleteCartItem(cartItem.id));
+      JSON.parse(localStorage.getItem("cartItems")).forEach((cartItem) =>
+        deleteCartItem(cartItem.id)
+      );
       totalAmountElement.textContent = "$0";
       let cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -165,10 +190,28 @@ function createNewItem(name, desc, img, price, id, loaded) {
 
 function addNewItem(e) {
   e.preventDefault();
+  e.stopPropagation();
   let name = addProductName.value;
+  if (name === "") {
+    addProductName.classList.add("warning");
+    return;
+  }
   let desc = addProductDesc.value;
+  if (desc === "") {
+    addProductDesc.classList.add("warning");
+    return;
+  }
   let img = addProductImg.value;
+  if (img === "") {
+    addProductImg.classList.add("warning");
+    return;
+  }
   let price = addProductPrice.value;
+
+  if (price <= 0) {
+    addProductPrice.classList.add("warning");
+    return;
+  }
   createNewItem(name, desc, img, price, false);
 }
 
@@ -194,7 +237,7 @@ function createCartItem(id, name, price, img, loaded) {
           <div class="product-info">
             <div>
               <h3>${name}</h3>
-              <p>$${price} &times; 1</p>
+              <p>$${price} &times; ${createdItem.noOf}</p>
             </div>
             <img
             src="${img}"
