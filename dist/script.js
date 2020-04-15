@@ -85,13 +85,13 @@ async function createItemsJson() {
 
 (function loadEventListeners() {
   addProductPrice.addEventListener("keyup", (e) => {
-    console.log(e.target.oldValue)
+    console.log(e.target.oldValue);
     if (!/^\d+$/.test(e.target.value)) {
-      addProductPrice.value ="";
-      addProductPrice.classList.add("warning")  
+      addProductPrice.value = "";
+      addProductPrice.classList.add("warning");
       return;
-    }else{
-      addProductPrice.classList.remove("warning")
+    } else {
+      addProductPrice.classList.remove("warning");
     }
   });
 
@@ -129,6 +129,10 @@ async function createItemsJson() {
       let cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     });
+    let cart = JSON.parse(localStorage.getItem("cartItems"));
+    if(cart.length === 0){
+      return;
+    }
     purchaseModal.classList.add("purchase");
     modal.appendChild(purchaseModal);
     modalContainer.classList.add("active");
@@ -247,8 +251,9 @@ function createCartItem(id, name, price, img, loaded) {
             <span>${createdItem.noOf}</span>
         </div>
         `;
-        let amountOfProducts = newCartItem.firstElementChild.firstElementChild.lastElementChild;
-        console.log(amountOfProducts)
+  let amountOfProducts =
+    newCartItem.firstElementChild.firstElementChild.lastElementChild;
+  console.log(amountOfProducts);
   let noOfProducts = newCartItem.lastElementChild.children[0];
   let minusBtn = document.createElement("button");
   minusBtn.textContent = "-";
@@ -260,7 +265,9 @@ function createCartItem(id, name, price, img, loaded) {
     }
     createdItem.noOf--;
     localStorage.setItem("cartItems", JSON.stringify(cart));
-    amountOfProducts.innerHTML = `$${price} × ${parseInt(noOfProducts.textContent - 1)}`
+    amountOfProducts.innerHTML = `$${price} × ${parseInt(
+      noOfProducts.textContent - 1
+    )}`;
     noOfProducts.textContent = parseInt(noOfProducts.textContent - 1);
     increaseTotal(-price);
   });
@@ -270,7 +277,7 @@ function createCartItem(id, name, price, img, loaded) {
     createdItem.noOf++;
     localStorage.setItem("cartItems", JSON.stringify(cart));
     let newNo = parseInt(noOfProducts.textContent) + 1;
-    amountOfProducts.innerHTML = `$${price} × ${newNo}`
+    amountOfProducts.innerHTML = `$${price} × ${newNo}`;
 
     noOfProducts.textContent = newNo;
     increaseTotal(price);
