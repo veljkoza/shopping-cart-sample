@@ -247,6 +247,8 @@ function createCartItem(id, name, price, img, loaded) {
             <span>${createdItem.noOf}</span>
         </div>
         `;
+        let amountOfProducts = newCartItem.firstElementChild.firstElementChild.lastElementChild;
+        console.log(amountOfProducts)
   let noOfProducts = newCartItem.lastElementChild.children[0];
   let minusBtn = document.createElement("button");
   minusBtn.textContent = "-";
@@ -258,6 +260,7 @@ function createCartItem(id, name, price, img, loaded) {
     }
     createdItem.noOf--;
     localStorage.setItem("cartItems", JSON.stringify(cart));
+    amountOfProducts.innerHTML = `$${price} × ${parseInt(noOfProducts.textContent - 1)}`
     noOfProducts.textContent = parseInt(noOfProducts.textContent - 1);
     increaseTotal(-price);
   });
@@ -267,6 +270,8 @@ function createCartItem(id, name, price, img, loaded) {
     createdItem.noOf++;
     localStorage.setItem("cartItems", JSON.stringify(cart));
     let newNo = parseInt(noOfProducts.textContent) + 1;
+    amountOfProducts.innerHTML = `$${price} × ${newNo}`
+
     noOfProducts.textContent = newNo;
     increaseTotal(price);
   });
